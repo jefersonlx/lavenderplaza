@@ -1,15 +1,40 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import Home from './pages/Home';
+import CadastroVideo from './pages/cadastro/Video'
 
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+
+ function NotFound(){
+   return ( 
+   <div>
+   <h1>Four Zero Four</h1>
+   <h2> Divirta-se enquanto procuramos sua página</h2>
+   <iframe title="bruaca" src="https://editor.p5js.org/jeferson.luiz.xavier/embed/D8GcsBiD6"></iframe>
+   </div> 
+ )   
+   
+ }
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root') 
+  // <React.StrictMode>
+  //   <Home />
+  // </React.StrictMode>,
+  <BrowserRouter>
+    <Switch>
+      <Route exact path="/" component={ Home}   /> 
+      {/* o exact faz com o a aplicação exija o caminho exato até ali, se tiver mais coisa não encontrará */}
+      <Route path="/cadastro/video" component={CadastroVideo} />
+      <Route component={NotFound} /> 
+      
+      {/* <Route component={()=>(<div><h1>Four Zero Four</h1><h2> Divirta-se enquanto procuramos sua página</h2><iframe src="https://editor.p5js.org/jeferson.luiz.xavier/embed/D8GcsBiD6"></iframe></div>)} />  */}
+      {/* como em todo switch temos o default, ou o 404, no caso é o último da linha */}
+   
+    </Switch>
+  </BrowserRouter>,
+  document.getElementById('root')
 );
 
-// todo o App que é o componente principal, roda dentro do elemento root, que no caso é uma div lá no index.html
+// todo o Home que é o componente principal, roda dentro do elemento root, que no caso é uma div lá no index.html
 
