@@ -17,10 +17,7 @@ function Menu() {
         <Button as={Link} className="ButtonLink" to="/cadastro/video">
             Novo Vídeo
             </Button>
-            {/* button as="a" faz com que o button tenha o comportamento de um [a]nchor */}
-        {/* <ButtonLink className="ButtonLink" href="/">
-            este é um children 2
-            </ButtonLink> */}
+       
         </nav>
     );
 }

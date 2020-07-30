@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Home from './pages/Home';
 import CadastroVideo from './pages/cadastro/Video'
+import CadastroCategoria from './pages/cadastro/Categoria'
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
@@ -26,7 +27,8 @@ ReactDOM.render(
       <Route exact path="/" component={ Home}   /> 
       {/* o exact faz com o a aplicação exija o caminho exato até ali, se tiver mais coisa não encontrará */}
       <Route path="/cadastro/video" component={CadastroVideo} />
-      <Route component={NotFound} /> 
+      <Route path="/cadastro/Categoria" component={CadastroCategoria} />
+       <Route component={NotFound} /> 
       
       {/* <Route component={()=>(<div><h1>Four Zero Four</h1><h2> Divirta-se enquanto procuramos sua página</h2><iframe src="https://editor.p5js.org/jeferson.luiz.xavier/embed/D8GcsBiD6"></iframe></div>)} />  */}
       {/* como em todo switch temos o default, ou o 404, no caso é o último da linha */}
