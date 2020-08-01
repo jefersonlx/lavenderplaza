@@ -4,14 +4,13 @@ import { Link } from 'react-router-dom';
 
  function CadastroVideo(){
     return(
-      <>
           <PageDefault>
         <h1>Cadastro de video</h1>
         <Link to="/cadastro/Categoria">
           Cadastrar Categoria
         </Link>
         </PageDefault>
-      </>
+   
     );
   }
 
