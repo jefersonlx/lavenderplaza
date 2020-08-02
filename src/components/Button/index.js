@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 // no react usando styled components, ao se utilizar um componente, o próprio uso de tags já injeta aquela tag no componente
 const Button = styled.button`    
     color: var(--white);

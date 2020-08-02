@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField';
@@ -10,7 +10,7 @@ function CadastroCategoria() {
     descricao: '',
     cor: '',
   };
-  const [categorias, setCategorias] = useState([{ nome: 'teste' }]);
+  const [categorias, setCategorias] = useState([]);
   const [values, setValues] = useState(valoresIniciais);
 
   function setValue(chave, valor) {
@@ -26,6 +26,35 @@ function CadastroCategoria() {
       infosDoEvento.target.value,
     );
   }
+
+  useEffect(() => {
+    if (window.location.href.includes('localhost')) {
+      const URL = 'http://localhost:3001/categorias';
+      fetch(URL)
+        .then(async (respostaDoServer) => {
+          if (respostaDoServer.ok) {
+            const resposta = await respostaDoServer.json();
+            setCategorias([
+              ...resposta,
+            ]);
+            return;
+          }
+          throw new Error('Não foi possível pegar os dados');
+        });
+    }
+  }, []);
+
+  // useEffect(() => {
+  //   console.log('alo alo ');
+  //   setTimeout(() => {
+  //     setCategorias([
+  //       ...categorias,
+  //       {
+  //         nome: 'Front End',
+  //       },
+  //     ]);
+  //   }, 4 * 1000);
+  // }, []); // [] representa qual ação da tela, no caso somente uma
 
   return (
     <PageDefault>
@@ -53,19 +82,13 @@ function CadastroCategoria() {
           value={values.nome}
           onChange={handleChange}
         />
-        <div>
-          <label htmlFor="desc">
-            Descrição
-            <textarea
-              id = "desc"
-              type="text"
-              value={values.descricao}
-
-              name="descricao"
-              onChange={handleChange}
-            />
-          </label>
-        </div>
+        <FormField
+          label="Descrição"
+          name="descricao"
+          type="textarea"
+          value={values.descricao}
+          onChange={handleChange}
+        />
         <FormField
           type="color"
           name="cor"
@@ -73,26 +96,14 @@ function CadastroCategoria() {
           value={values.cor}
           onChange={handleChange}
         />
-
-        {/* <div>
-            <label>
-                Cor
-                <input type="color"
-                    value={values.cor}
-                    name = 'cor'
-                    onChange = {handleChange}
-                    // onChange={function funcaoHandlerQueOErroPediu(infosDoEvento) {
-                    //     // console.log('[infosDoEvento]', infosDoEvento.target.value);
-                    //     // console.log('[nomeCategoria]', nomeCategoria);
-                    //     // setValues(infosDoEvento.target.value)
-                    //     setValue('cor', infosDoEvento.target.value);
-                    // }}
-                />
-            </label>
-        </div> */}
         <Button>Cadastrar</Button>
 
       </form>
+      {categorias.length === 0 && (
+      <div>
+        Loadeando...
+      </div>
+      )}
       <ul>
         {categorias.map((categoria, indice) => (
           <li key={`${categoria}${indice}`}>

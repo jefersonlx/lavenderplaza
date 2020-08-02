@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import './style404.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import CadastroVideo from './pages/cadastro/Video';
@@ -8,10 +9,10 @@ import CadastroCategoria from './pages/cadastro/Categoria';
 
 function NotFound() {
   return (
-    <div>
-      <h1>Four Zero Four</h1>
-      <h2> Divirta-se enquanto procuramos sua página</h2>
-      <iframe title="bruaca" src="https://editor.p5js.org/jeferson.luiz.xavier/embed/D8GcsBiD6" />
+    <div className="body404">
+      <h1 className="h1404">Four Zero Four</h1>
+      <h2 className="h2404"> Divirta-se enquanto procuramos sua página</h2>
+      <iframe className="iframe404" title="bruaca" src="https://editor.p5js.org/jeferson.luiz.xavier/embed/D8GcsBiD6" />
     </div>
   );
 }
