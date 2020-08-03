@@ -3,29 +3,17 @@ import { Link } from 'react-router-dom';
 import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField';
 import Button from '../../../components/Button';
+import userForm from '../../../hooks/userForm';
 
 function CadastroCategoria() {
   const valoresIniciais = {
-    nome: '',
+    titulo: '',
     descricao: '',
     cor: '',
   };
+
+  const { handleChange, values, clearForm } = userForm(valoresIniciais);
   const [categorias, setCategorias] = useState([]);
-  const [values, setValues] = useState(valoresIniciais);
-
-  function setValue(chave, valor) {
-    setValues({
-      ...values,
-      [chave]: valor, // sobrepoe o valor da key especificada em relacao ao array recebido previamente
-    });
-  }
-
-  function handleChange(infosDoEvento) {
-    setValue(
-      infosDoEvento.target.getAttribute('name'),
-      infosDoEvento.target.value,
-    );
-  }
 
   useEffect(() => {
     const URL = window.location.href.includes('localhost')
@@ -45,23 +33,11 @@ function CadastroCategoria() {
       });
   }, []);
 
-  // useEffect(() => {
-  //   console.log('alo alo ');
-  //   setTimeout(() => {
-  //     setCategorias([
-  //       ...categorias,
-  //       {
-  //         nome: 'Front End',
-  //       },
-  //     ]);
-  //   }, 4 * 1000);
-  // }, []); // [] representa qual ação da tela, no caso somente uma
-
   return (
     <PageDefault>
       <h1>
         Cadastro de Categoria:
-        {values.nome}
+        {values.titulo}
       </h1>
       <form
         style={{ background: values.cor }}
@@ -73,14 +49,14 @@ function CadastroCategoria() {
             values,
           ]);
 
-          setValues(valoresIniciais);
+          clearForm();
         }}
       >
         <FormField
 
-          label="Nome"
-          name="nome"
-          value={values.nome}
+          label="Titulo"
+          name="titulo"
+          value={values.titulo}
           onChange={handleChange}
         />
         <FormField
@@ -108,7 +84,7 @@ function CadastroCategoria() {
       <ul>
         {categorias.map((categoria, indice) => (
           <li key={`${categoria}${indice}`}>
-            {categoria.nome}
+            {categoria.titulo}
           </li>
         ))}
       </ul>
